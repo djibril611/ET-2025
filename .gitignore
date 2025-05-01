@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+
+# VS Code / IDE stuff
+.vscode/
+.idea/
+
+# Large media (optional)
+frontend/videos/idle_loop.mp4
+frontend/videos/welcome_*.mp4
+
+# OS files
+.DS_Store
+Thumbs.db

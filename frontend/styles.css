@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:'Poppins',sans-serif}
+
+/* put this near the top with the other global rules */
+.hidden{
+    display:none !important;   /* 🔒 absolutely nothing shows */
+    visibility:hidden !important;
+}
+
+/* …everything else in the file remains unchanged … */
+
+/* ▸ Idle loop */
+#idle-loop{position:fixed;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* ▸ Welcome clip */
+#welcome-video{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;background:#000}
+.hidden{display:none}
+
+/* ▸ Verification overlay */
+#verify-layer{
+    position:fixed;inset:0;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    gap:2.4rem;
+    backdrop-filter:blur(7px) brightness(.5);
+    animation:fadeIn .25s ease-out;
+}
+
+/* Blue background when verifying */
+.verifying{
+    background:rgba(33,66,148,.85);  /* #214294 at 85 % opacity */
+}
+
+/* circular live feed */
+.circle-wrapper{position:relative;width:340px;height:340px}
+#live-feed{width:100%;height:100%;border-radius:50%;object-fit:cover}
+
+/* neon ring (visible only in verifying) */
+.ring{
+    display:none;
+    position:absolute;inset:-6px;border-radius:50%;
+    background:conic-gradient(from 0deg,#ffb100 0 25%,#b16dff 25% 50%,#ff4d4d 50% 75%,#29e0ff 75% 100%);
+    filter:blur(4px);
+}
+/* override old circle layout — give feed full screen */
+#live-feed{
+    position:fixed;                 /* fill viewport */
+    inset:0;
+    width:100vw;
+    height:100vh;
+    object-fit:cover;               /* keep aspect */
+}
+
+/* remove unused ring & dots styles (optional clean-up) */
+/* .ring , .dots { display:none !important; } */
+
+
+/* pulsing dots (visible only in verifying) */
+.dots{
+    display:none;
+    position:absolute;inset:-16px;border-radius:50%;pointer-events:none;
+    background:url("data:image/svg+xml,\
+     <svg xmlns='http://www.w3.org/2000/svg' width='340' height='340'>\
+       <circle cx='170' cy='20'  r='4' fill='%23fff'/>\
+       <circle cx='300' cy='170' r='4' fill='%23fff'/>\
+       <circle cx='170' cy='320' r='4' fill='%23fff'/>\
+       <circle cx='40'  cy='170' r='4' fill='%23fff'/>\
+     </svg>") center/100% 100% no-repeat;
+}
+
+
+/* show ring & dots while verifying */
+.verifying .ring,
+.verifying .dots{display:block;animation:spin 3s linear infinite}
+.verifying .dots{animation:pulse 1.3s ease-out infinite}
+
+/* status text */
+#status-text{color:#fff;font-size:2.4rem;text-align:center;text-shadow:0 0 10px #000}
+
+/* colour feedback */
+.granted #status-text{color:#00ff88}
+.denied  #status-text{color:#ff4d4d}
+
+/* hint */
+#hint{position:fixed;bottom:2rem;right:2rem;color:#fff9;font-size:.95rem;font-style:italic}
+#hint span{font-weight:600;color:#fff}
+
+/* animations */
+@keyframes spin{to{transform:rotate(1turn)}}
+@keyframes pulse{0%,100%{opacity:.1}50%{opacity:.9}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}

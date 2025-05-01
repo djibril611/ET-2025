@@ -1,0 +1,8 @@
+flask
+face_recognition
+opencv-python
+numpy
+python-vlc
+RPi.GPIO ; platform_system=="Linux"
+RPi.GPIO ; platform_machine=="armv7l"
+RPi.GPIO ; platform_machine=="aarch64"
